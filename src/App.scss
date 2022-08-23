@@ -1,0 +1,433 @@
+@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&display=swap');
+@import './styles/variables.scss';
+
+/* Mixins */
+@mixin hover {
+  &:hover, &:focus, &:active { @content; }
+}
+
+@mixin flex-all($direction: null, $justify: null, $align: null, $wrap: null, $inline: null) {
+	@if $inline == true {
+		display: inline-flex;
+	} @else {
+		display: flex;
+	}
+	
+	@if $direction != null {
+		flex-direction: $direction;
+	}
+	@if $justify != null {
+		justify-content: $justify;
+	}
+	@if $align != null {
+		align-items: $align;
+	}
+	@if $wrap != null {
+		flex-wrap: $wrap;
+	}
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+a { 
+  cursor: pointer; 
+  text-decoration: none;
+}
+
+.flex { display: flex; }
+
+.display-none { display: none; }
+.display-block { display: block; }
+
+
+.width-hidden {
+  max-width: 0;
+  height: 0;
+  overflow: hidden;
+  transition: .3s ease;
+}
+.width-full { 
+  transition: .3s ease;
+  width: 100%;
+  max-width: 380px;
+}
+
+.bg-primary {
+  background-color: $primary-color !important;
+  color: $over-primary-color !important;
+
+  a, button { color: $over-primary-color; }
+}
+
+.bg-secondary {
+  background-color: $secondary-color !important;
+  color: $over-secondary-color !important;
+
+  a, button { color: $over-secondary-color; }
+}
+
+.bg-third {
+  background-color: $third-color !important;
+  color: $over-third-color !important;
+
+  a, button { color: $over-third-color; }
+}
+
+.bg-grey { background-color: $grey-color; }
+
+.img-thumbnail { padding: 0.05rem; }
+
+.navbar { 
+  max-height: 70px; 
+  margin-bottom: 10px;
+}
+
+.btn-close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  z-index: 99;
+}
+
+.text-hidden {
+  display: inline-flex;
+  overflow: hidden;
+  max-width: 0;
+  transition: .3s ease;
+}
+
+.container-xxxl {
+  .row { margin: 0; }
+}
+
+#colapsed {
+  position: relative;
+  transition: .3s ease;
+
+  &.off { 
+    max-width: initial; 
+    .btn-close { 
+      display: block; 
+      right: 25px;
+    }
+    .open { display: none; }
+  }
+  
+  &.on { 
+    max-width: 130px; 
+
+    .btn-close { display: none; }
+    .text-hidden { display: none; }
+
+    .open {
+      @include flex-all($justify: center, $align: center);
+      border-radius: 50%;
+      transform: translateX(0);
+      cursor: pointer;
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      width: 50px;
+      height: 50px;
+      z-index: 1;
+      transition: .3s ease;
+
+      svg { margin-left: 15px; }
+    }
+
+    @include hover {
+      .open { right: -12px; }
+    }
+  }
+}
+
+/* Estilos para controles izquierdos */
+.navigation {
+  position: relative;
+
+  .container-nav {
+    padding: 20px;
+    height: 100%;
+    z-index: 9;
+    border-radius: 8px 8px 0 0;
+    position: relative;
+    @include flex-all($direction: column, $align: center);
+  }
+
+  .img-thumbnail {
+    width: 64px;
+    height: 64px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  .dropdown {
+    margin-bottom: 30px;
+
+    .dropdown-toggle {
+      padding-left: 25px;
+    }
+
+    &:after {
+      margin-left: 0.3em;
+      vertical-align: 0.15em;
+    }
+  
+    .profile-status {
+      position: relative;
+
+      &:before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        left: -15px;
+        position: absolute;
+        border-radius: 50%;
+        top: calc(50% - 4px);
+      }
+
+      &.green:before { background-color: $green-color; }
+      &.yellow:before { background-color: $yellow-color; }
+      &.blue:before { background-color: $blue-color; }
+      &.red:before { background-color: $red-color; }
+    }
+
+    .dropdown-menu {
+      min-width: min-content;
+
+      a { 
+        transition: .3s ease;
+        color: black; 
+        font-size: 14px;
+        padding-left: 25px;
+      }
+    }
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    height: 46px;
+    position: relative;
+    padding: 0;
+    width: fit-content;
+
+    @include hover {
+      color: white;
+      &:before { width: calc(100% - 35px); }
+    }
+
+    &:before {
+      background-color: white;
+      height: 1px;
+      width: 0;
+      transition: .3s ease;
+      bottom: 4px;
+      left: 35px;
+      content: '';
+      position: absolute;
+    }
+    svg { margin-right: 10px; }
+  }
+}
+
+/* Estilos para el control de Chats */
+.nav-tabs {
+  border-radius: 8px 8px 0 0;
+
+  .nav-link {
+    background-color: transparent;
+    border: none;
+    text-transform: uppercase;
+    font-weight: 600;
+
+    &:hover, &:focus, &:active {
+      color: white;
+    }
+
+    &.active {
+      background-color: transparent;
+      border: none;
+      color: white;
+      border-bottom: 3px solid $primary-color;
+    }
+  }
+}
+
+.tab-content {
+  margin-top: -1px;
+  background-color: white;
+
+  .status-chat {
+    display: flex;
+    align-items: center;
+    height: 56px;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+    h6 { 
+      color: $third-color;
+      margin: 0; 
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+
+      svg { 
+        margin-right: 10px; 
+        fill: $third-color;
+      }
+    }
+  }
+
+  .card {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-gap: 10px;
+    border: none;
+    align-items: center;
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0;
+      background-color: transparent;
+      border: none;
+    }
+
+    .card-text {
+      color: $almost-black-color;
+      overflow: hidden;
+      line-height: 1.25em;
+      max-height: 1.25em;
+    }
+
+    img.card-img-center {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin: 0 auto;
+    }
+  }
+}
+
+/* Estilos para conversación */
+.container-conversation {
+  width: -webkit-fill-available;
+
+  .card-chat {
+    border-radius: 8px 8px 0 0;
+
+    .card {
+      display: flex;
+      flex-direction: row;
+      background: transparent;
+      align-items: center;
+      padding: 0 20px;
+      box-sizing: border-box;
+      border: none;
+
+      img {
+        width: 64px;
+        height: 64px;
+      }
+    }
+  }
+
+  .conversation-chat {
+    position: relative;
+    height: calc(100vh - 70px - 170px - 88px);
+    padding: 30px 20px 130px 20px;
+    box-sizing: border-box;
+
+    .date {
+      background: white;
+      width: fit-content;
+      padding: 5px;
+      margin: 0 auto;
+      border-radius: 10px;
+    }
+  }
+
+  .container-input {
+    bottom: 30px;
+    position: absolute;
+    width: calc(100% - 40px);
+
+    form {
+      @include flex-all($direction: row, $align: center);
+      width: 100%;
+      padding: 16px;
+      background: $dark-grey-color;
+      border-radius: 10px;
+    }
+  }
+}
+
+#user-profile-sidebar {
+  margin-left: 20px;
+  position: relative;
+  height: 0;
+  transition: .3s ease;
+  background-color: white;
+
+  .btn {
+    border: 1px solid $primary-color;
+    transition: .3s ease;
+    padding: {
+      left: 25px;
+      right: 25px;
+    }
+
+    &.btn-Light {
+      margin-right: 20px;
+      color: $primary-color;
+    }
+
+    &.btn-primary {
+      background-color: $primary-color;
+    }
+  }
+
+  .card-img-top { 
+    border-radius: 10px; 
+    max-height: 200px;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .card {
+    .card-title, .card-text { font-size: 1rem; }
+    .card-text { color: $almost-black-color; }
+  }
+}
+
+#footer {
+  position: relative;
+  box-sizing: border-box;
+  max-height: 160px;
+  padding: {
+    top: 25px;
+    bottom: 25px;
+  }
+  
+  a {
+    @include hover {
+      color: $secondary-color;
+    }
+  }
+}
+
+
+@media only screen and (min-width: 768px) {
+  .full-height { height: calc(100vh - 70px - 170px); }
+}
+
+
+@media only screen and (min-width: 1000px) {
+  .text-hidden {
+    max-width: 100%;
+  }
+}
