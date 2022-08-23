@@ -11,7 +11,7 @@ import { ArrowRightShort } from 'react-bootstrap-icons';
 import { useState } from 'react';
 import CloseButton from 'react-bootstrap/CloseButton';
 import './App.scss';
-
+  
 function App() {
   const [style, setStyle] = useState("off");
   
