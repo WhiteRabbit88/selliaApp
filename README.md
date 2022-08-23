@@ -1,6 +1,6 @@
 # Sellia App
 
-
+Sellia es la plataforma de comunicación con el cliente que ayuda a las empresas a estar siempre disponibles frente a consumidores que necesitan soluciones rápidamente.
 
 ## Comenzando 🚀
 
