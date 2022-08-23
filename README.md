@@ -35,8 +35,6 @@ npm install react-bootstrap-icons --save
 ```
 
 
-## Autores ✒️
+## Autor ✒️
 
-_Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
-
-* **Melina Blanco** - *Front-end Developer* - [villanuevand]([https://github.com/villanuevand](https://github.com/WhiteRabbit88))
+* **Melina Blanco** - *Front-end Developer* - [WhiteRabbit88]([https://github.com/WhiteRabbit88])
